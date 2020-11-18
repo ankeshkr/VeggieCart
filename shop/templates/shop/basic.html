@@ -16,7 +16,7 @@
   <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/shop">Veggie Cart</a>
+  <a class="navbar-brand" href="/shop">VeggieCart</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -65,65 +65,10 @@ sagittis lacus vel augue laoreet rutrum faucibus.">
   crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  
+    {% block js %} {% endblock %}
   </body>
 
-  <script>
-    console.log("working");
-    if (localStorage.getItem('cart') == null) {
-      var cart = {};
-    }
-    else {
-      cart = JSON.parse(localStorage.getItem('cart'));
-      document.getElementById('cart').innerHTML = Object.keys(cart).length;
-      updateCart(cart)
-    }
-    $('.cart').click(function () {
-      console.log('clicked');
-      var idstr = this.id.toString();
-      console.log(idstr);
-      if (cart[idstr] != undefined) {
-        cart[idstr] = cart[idstr] + 1;
-      }
-      else {
-        cart[idstr] = 1;
-      }
-      console.log(cart);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      
-      document.getElementById('cart').innerHTML = Object.keys(cart).length;
-      updateCart(cart)
-    });
-    $('#popcart').popover();
-    document.getElementById("popcart").setAttribute('data-content', '<h5>Cart<h5>');
 
-    function updateCart(cart) {
-      console.log(cart);
-      for (var item in cart) {
-        document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
-      }
-    }
-  //if plus or minus button is clicked
-  $('.divpr').on("click","button.minus", function(){
-    console.log("minus clicked");
-    a=this.id.slice(7,);
-    console.log(a);
-    cart['pr'+a]=cart['pr'+a]-1;
-    cart['pr'+a]=Math.max(0, cart['pr'+a])
-    document.getElementById('valpr'+a).innerHTML = cart['pr'+a];
-    updateCart(cart);
-  });
-  $('.divpr').on("click","button.plus", function(){
-    console.log("plus clicked");
-    a=this.id.slice(6,);
-    console.log(a);
-    cart['pr'+a]=cart['pr'+a]+1;
-    document.getElementById('valpr'+a).innerHTML = cart['pr'+a];
-    updateCart(cart);
-  });
-
-    
-  </script>
-</body>
-
+  
+ 
 </html>
